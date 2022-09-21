@@ -8,3 +8,6 @@ https://aws.amazon.com/jp/dynamodb/getting-started/
 
 https://aws.amazon.com/jp/getting-started/hands-on/create-manage-nonrelational-database-dynamodb/
 
+
+---
+## 
