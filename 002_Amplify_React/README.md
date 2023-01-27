@@ -9,3 +9,8 @@ npx create-react-app amplifyapp
 cd amplifyapp
 npm start
 ```
+
+
+## ルートディレクトリ指定
+monorepoを接続しますか？の箇所で
+ルートディレクトリを指定することでカスタマイズ可
