@@ -1,0 +1,9 @@
+version: '3'
+services:
+  dev:
+    build: .
+    volumes:
+      - .:/app
+      - ${HOME}/.aws:/root/.aws
+      - ${HOME}/.ssh:/root/.ssh
+      - ${HOME}/.gitconfig:/root/.gitconfig
