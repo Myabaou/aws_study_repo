@@ -189,3 +189,40 @@ docker container run \
 docker container exec --interactive --tty mysql_db2 \
 mysql --user=root --password=secret sample
 ```
+
+## 22章 バインドマウントの利用
+
+- Rubyファイルの作成
+
+```hello.rb
+puts "hello from host-machine."
+```
+
+- Rubyコンテナを起動
+
+```sh
+docker container run \
+  --name ruby \
+  --rm \
+  --interactive \
+  --tty \
+  --mount type=bind,source="$(pwd)",target=/my-work \
+  ruby:3.2 \
+  bash
+```
+
+- コンテナ上でRubyファイルを実行
+
+```sh
+ruby /my-work/hello.rb
+```
+
+- コンテナ上でファイルを削除
+
+```sh
+rm /my-work/hello.rb
+```
+
+結果ローカルからもファイルが消えている。
+
+
