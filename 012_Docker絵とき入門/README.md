@@ -29,13 +29,11 @@ docker run -p 5432:5432 --rm --detach --name db postgres-test
 docker stop db
 ```
 
-
 ## 起動中のDockerfileにログイン
 
 ```sh
 docker container exec --interactive --tty db bash
 ```
-
 
 ## postgressqlログイン
 
@@ -47,7 +45,39 @@ docker container exec --interactive --tty db psql --host 127.0.0.1 --port 5432 -
 
 ## Posrgres SQL
 
-
 ```sql
 SELECT datname FROM pg_database;
+```
+
+---
+
+## Python WEB
+
+- Build
+
+```sh
+docker build -t my-python:web -f web_Dockerfile .
+```
+
+- 起動
+
+```sh
+docker container run \
+  --name web \
+  --rm \
+  --detach \
+  --publish 8000:8000 \
+  my-python:web
+```
+
+- 停止
+
+```sh
+docker container stop web
+```
+
+- 削除
+
+```sh
+docker container rm -f web
 ```
