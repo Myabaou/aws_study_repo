@@ -1,7 +1,12 @@
-# 第一引数指定でTypescriptのコンパイルを行う
+.PHONY: run
 
-.PHONY: % 
-
-%:
-	node_modules/.bin/tsc $*.ts
-	node $*.js
+run:
+	@FILES=$$(find . -name "$(FILE).ts"); \
+	if [ -z "$$FILES" ]; then \
+		echo "No files found"; \
+	else \
+		for FILE in $$FILES; do \
+			node_modules/.bin/tsc $$FILE; \
+			node $${FILE%.ts}.js; \
+		done; \
+	fi
