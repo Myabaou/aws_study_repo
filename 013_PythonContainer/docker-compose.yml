@@ -1,0 +1,18 @@
+services:
+  python310:
+    image: python:3.10
+    container_name: py310
+    volumes:
+      - .:/app
+    working_dir: /app
+    tty: false
+#    command: bash
+
+  python311:
+    image: python:3.11
+    container_name: py311
+    volumes:
+      - .:/app
+    working_dir: /app
+    tty: false
+#    command: bash
