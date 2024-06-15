@@ -32,11 +32,11 @@ print("Python version:", platform.python_version())
 ```
 
 ```sh
-docker run -v $(pwd):/app -w /app python:3.11 python helloworld.py
+docker run --rm -v $(pwd):/app -w /app python:3.11 python helloworld.py
 ```
 
 ```sh
-docker run -v $(pwd):/app -w /app python:3.11 python helloworld.py
+docker run --rm -v $(pwd):/app -w /app python:3.11 python helloworld.py
 ```
 
 ## エイリアス登録
@@ -48,8 +48,8 @@ docker run -v $(pwd):/app -w /app python:3.11 python helloworld.py
 ```sh
 # python For Docker
 
-alias python310='docker run -v $(pwd):/app -w /app python:3.10 python'
-alias python311='docker run -v $(pwd):/app -w /app python:3.11 python'
+alias python310='docker run --rm -v $(pwd):/app -w /app python:3.10 python'
+alias python311='docker run --rm -v $(pwd):/app -w /app python:3.11 python'
 ```
 
 - 実行例

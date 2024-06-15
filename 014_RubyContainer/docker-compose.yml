@@ -1,0 +1,19 @@
+services:
+  rubyrails31:
+    build:
+      context: ./ruby31/
+      dockerfile: Dockerfile
+    image: rubyrails:3.1
+    tty: false
+  rubyrails32:
+    build:
+      context: ./ruby32/
+      dockerfile: Dockerfile
+    image: rubyrails:3.2
+    tty: false
+  rubyrails33:
+    build:
+      context: ./ruby33/
+      dockerfile: Dockerfile
+    image: rubyrails:3.3
+    tty: false
