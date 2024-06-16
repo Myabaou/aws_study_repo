@@ -56,7 +56,7 @@ SELECT datname FROM pg_database;
 - Build
 
 ```sh
-docker build -t my-python:web -f web_Dockerfile .
+docker build -t my-python:web -f web/Dockerfile .
 ```
 
 - 起動
@@ -68,6 +68,12 @@ docker container run \
   --detach \
   --publish 8000:8000 \
   my-python:web
+```
+
+- アクセス確認
+
+```sh
+curl http://localhost:8000
 ```
 
 - 停止
@@ -224,5 +230,33 @@ rm /my-work/hello.rb
 ```
 
 結果ローカルからもファイルが消えている。
+
+---
+
+## 23章 PHPコンテナからMYSQLコンテナの通信する
+
+- ネットワークの作成
+
+```sh
+docker network create my-network
+```
+
+- ネットワーク一覧確認
+
+```sh
+docker network ls
+```
+
+- Build
+
+```sh
+docker compose build
+```
+
+- 疎通確認
+
+```sh
+docker container run my-php:ping ping  -c 3 -t 1 localhost
+```
 
 

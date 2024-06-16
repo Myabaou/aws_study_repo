@@ -1,0 +1,6 @@
+services:
+  phpping:
+    image: my-php:ping
+    build:
+      context: php
+      dockerfile: Dockerfile
