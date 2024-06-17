@@ -1,6 +1,24 @@
 services:
   phpping:
-    image: my-php:ping
+    image: my-php:pdo_mysql
     build:
       context: php
       dockerfile: Dockerfile
+    networks:
+      - my-network
+  db:
+    image: mysql:8.2
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: sample
+    ports:
+      - "3306:3306"
+    networks:
+      - my-network
+
+networks:
+  my-network:
+    external: true
+  container-link:
+    # これが作成されるネットワーク名（同名がなければ自動生成される）
+    name: my-network

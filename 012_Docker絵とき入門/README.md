@@ -235,6 +235,8 @@ rm /my-work/hello.rb
 
 ## 23章 PHPコンテナからMYSQLコンテナの通信する
 
+### 23.1 ネットワークの作成
+
 - ネットワークの作成
 
 ```sh
@@ -259,4 +261,128 @@ docker compose build
 docker container run my-php:ping ping  -c 3 -t 1 localhost
 ```
 
+### 23.2 コンテナ起動時にネットワークに接続する
+
+- Build
+
+```sh
+docker compose build
+```
+
+- Up
+
+```sh
+docker compose up -d
+```
+
+- MYSQLに接続してデータ作成
+
+```sh
+docker compose exec db mysql --host=127.0.0.1 --port=3306 --user=root --password=secret sample
+```
+
+```sql
+create table user (id int, name varchar(32));
+```
+
+- ユーザ作成
+
+```sql
+insert into user (id,name) values (1,'John Doe');
+```
+
+```sql
+insert into user (id,name) values (2,'Jane Doe');
+```
+
+
+- 確認
+
+```sql
+select * from user;
+```
+
+- PHPコンテナからMYSQLコンテナに接続できるか確認
+
+```sh
+docker container run --network my-network --rm my-php:ping ping -c 3 -t 1 db
+```
+
+- PHPコンテナPHP実行
+
+```sh
+docker container run \
+--rm \
+--mount type=bind,source="$(pwd)",target=/my-work \
+--network my-network \
+my-php:pdo_mysql \
+php /my-work/main.php 
+```
+
+
+
+- my-networkの状態を確認
+
+```sh
+docker network inspect my-network
+```
+
+
+### 23.2 デフォルトブリッジネットワークを使用したコンテナ通信
+
+- calledコンテナを起動
+
+```sh
+docker container run --rm --name called --detach nginx:1.25
+```
+
+
+- calledコンテナのIPアドレス確認
+
+```sh
+docker container inspect called
+```
+
+
+- calledコンテナにping
+
+
+```sh
+docker container run \
+--name calling \
+--rm \
+my-php:ping ping -c 3 -t 1 172.17.0.3
+```
+
+
+
+- --linkオプションを使用してコンテナを接続
+
+```sh
+docker container run \
+--name calling \
+--rm \
+--link called:web-server \
+my-php:ping \
+ping -c 3 -t 1 web-server
+```
+
+
+
+- callingの環境変数を確認する
+
+```sh
+docker container run \
+--name calling \
+--rm \
+--interactive \
+--tty \
+--link called:web-server my-php:ping \
+bash
+```
+
+
+```bash
+env | sort | grep WEB_SERVER_ENV_
+```
 
