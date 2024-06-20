@@ -295,7 +295,6 @@ insert into user (id,name) values (1,'John Doe');
 insert into user (id,name) values (2,'Jane Doe');
 ```
 
-
 - 確認
 
 ```sql
@@ -319,14 +318,11 @@ my-php:pdo_mysql \
 php /my-work/main.php 
 ```
 
-
-
 - my-networkの状態を確認
 
 ```sh
 docker network inspect my-network
 ```
-
 
 ### 23.2 デフォルトブリッジネットワークを使用したコンテナ通信
 
@@ -336,16 +332,13 @@ docker network inspect my-network
 docker container run --rm --name called --detach nginx:1.25
 ```
 
-
 - calledコンテナのIPアドレス確認
 
 ```sh
 docker container inspect called
 ```
 
-
 - calledコンテナにping
-
 
 ```sh
 docker container run \
@@ -353,8 +346,6 @@ docker container run \
 --rm \
 my-php:ping ping -c 3 -t 1 172.17.0.3
 ```
-
-
 
 - --linkオプションを使用してコンテナを接続
 
@@ -366,8 +357,6 @@ docker container run \
 my-php:ping \
 ping -c 3 -t 1 web-server
 ```
-
-
 
 - callingの環境変数を確認する
 
@@ -381,8 +370,91 @@ docker container run \
 bash
 ```
 
-
 ```bash
 env | sort | grep WEB_SERVER_ENV_
 ```
 
+--
+
+## 25章必要なイメージを準備する
+
+### 25.1 ディレクトリの作成
+
+```sh
+mkdir -p work/docker/app
+mkdir -p work/docker/db
+mkdir -p work/docker/mail
+mkdir -p work/src
+```
+
+### 25.4 Appイメージを準備する
+
+- ビルドインWEBサーバをお試し起動
+
+```sh
+docker run --rm --publish 8000:8000 php:8.2 php --server 0.0.0.0:8000
+```
+
+- PHPコマンドのパスを確認
+
+```sh
+docker run --rm php:8.2 which php
+```
+
+- DockerfileからAppイメージをビルド
+
+```sh
+docker image build --tag work-app:0.1.0 docker/app
+```
+
+## 25.5 章まとめ
+
+- Appコンテナの起動確認
+
+```sh
+docker container run \
+--name app \
+--rm \
+--detach \
+--publish 8000:8000 \
+work-app:0.1.0 \
+/usr/local/bin/php --server 0.0.0.0:8000 --docroot /
+```
+
+- DBコンテナの起動確認
+
+```sh
+docker container run \
+--name db \
+--rm \
+--detach \
+--env MYSQL_ROOT_PASSWORD=secret \
+--env MYSQL_USER=app \
+--env MYSQL_PASSWORD=pass1234 \
+--env MYSQL_DATABASE=sample \
+--env TZ=Asia/Tokyo \
+--publish 3306:3306 \
+mysql:8.2
+```
+
+
+- mysqlにログイン
+
+```sh
+docker container exec --interactive --tty db \
+mysql --user=app --password=pass1234 sample
+```
+
+
+- Mailコンテナ起動確認
+
+
+```sh
+docker container run \
+--name mail \
+--rm \
+--detach \
+--env TZ=Asia/Tokyo \
+--publish 8025:8025 \
+axllent/mailpit:v1.10.1
+```
