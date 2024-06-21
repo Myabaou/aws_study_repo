@@ -490,6 +490,5 @@ docker volume create --name work-mail-volume
 
 - Appコンテナの起動
 
-:::note warn
-Appコンテナが起動中だと失敗する可能性があるので起動してたら停止する
-:::
+> [!WARNING]
+> Appコンテナが起動中だと失敗する可能性があるので起動してたら停止する
