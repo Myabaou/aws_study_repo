@@ -437,7 +437,6 @@ docker container run \
 mysql:8.2
 ```
 
-
 - mysqlにログイン
 
 ```sh
@@ -445,9 +444,7 @@ docker container exec --interactive --tty db \
 mysql --user=app --password=pass1234 sample
 ```
 
-
 - Mailコンテナ起動確認
-
 
 ```sh
 docker container run \
@@ -458,3 +455,41 @@ docker container run \
 --publish 8025:8025 \
 axllent/mailpit:v1.10.1
 ```
+
+## 26章 コンテナ以外のリソースを準備する
+
+### 26.1 Appコンテナを整理する
+
+- index.phpを作成
+
+- ネットワークの作成
+
+```sh
+docker network create work-network
+```
+
+### ２６．２　DBコンテナを整理する
+
+- DBコンテナ用のボリューム作成
+
+```sh
+docker volume create --name work-db-volume
+```
+
+### 26.3 Mailコンテナを整理する
+
+- Mailコンテナ用のボリューム作成
+
+```sh
+docker volume create --name work-mail-volume
+```
+
+## 27章　コンテナの起動
+
+### 27.1 App,DB,Mailコンテナを起動
+
+- Appコンテナの起動
+
+:::note warn
+Appコンテナが起動中だと失敗する可能性があるので起動してたら停止する
+:::
