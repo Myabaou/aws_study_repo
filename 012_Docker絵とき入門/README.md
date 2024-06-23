@@ -488,7 +488,74 @@ docker volume create --name work-mail-volume
 
 ### 27.1 App,DB,Mailコンテナを起動
 
-- Appコンテナの起動
-
 > [!WARNING]
 > Appコンテナが起動中だと失敗する可能性があるので起動してたら停止する
+
+- 停止コマンド
+
+```sh
+docker container stop app
+```
+
+- Appコンテナの起動
+
+```sh
+docker container run \
+--name app \
+--rm \
+--detach \
+--network work-network \
+--mount type=bind,source="$(pwd)"/src,target=/my-work \
+--publish 8000:8000 \
+work-app:0.1.0 \
+/usr/local/bin/php --server 0.0.0.0:8000 --docroot /my-work /
+```
+
+
+- DBコンテナの起動
+
+```sh
+docker container run \
+--name db \
+--rm \
+--detach \
+--network work-network \
+--mount type=volume,source=work-db-volume,target=/var/lib/mysql \
+--mount type=bind,source="$(pwd)"/docker/db/init,target=/docker-entrypoint-initdb.d \
+--env MYSQL_ROOT_PASSWORD=secret \
+--env MYSQL_USER=app \
+--env MYSQL_PASSWORD=pass1234 \
+--env MYSQL_DATABASE=sample \
+--env TZ=Asia/Tokyo \
+--publish 3306:3306 \
+mysql:8.2
+```
+
+
+- Mailコンテナの起動
+
+```sh
+docker container run \
+--name mail \
+--rm \
+--detach \
+--network work-network \
+--mount type=volume,source=work-mail-volume,target=/data \
+--env TZ=Asia/Tokyo \
+--env MP_DATA_FILE=/data/mailpit.db \
+--publish 8025:8025 \
+axllent/mailpit:v1.10.1
+```
+
+
+### 27.2 無座ウザを確認
+
+- エラー
+
+```log
+
+Warning: Unknown: Failed to open stream: Invalid argument in Unknown on line 0
+
+Fatal error: Failed opening required '/' (include_path='.:/usr/local/lib/php') in Unknown on line 0
+```
+
