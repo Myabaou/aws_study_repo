@@ -580,11 +580,9 @@ docker container stop app mail db
 
 - 全てのコンテナを起動する
 
-``sh
+```sh
 docker compose up --detach --build
-
 ```
-
 
 - 起動確認
 
