@@ -568,3 +568,44 @@ root@8f8adf3688b7:/# curl http://localhost:8000
 
 → `docroot` で指定していたパスが誤っていた。　my-workに加えて`/`を追加してしまっていたため
 
+## 28章　Docker Composeの利用
+
+### 28.3 Dcoker Composeの基本操作
+
+- 今まで起動したコンテナを停止
+
+```sh
+docker container stop app mail db
+```
+
+- 全てのコンテナを起動する
+
+``sh
+docker compose up --detach --build
+
+```
+
+
+- 起動確認
+
+```sh
+docker compose ps
+```
+
+- 起動中コンテナでコマンドを実行する
+
+```sh
+docker compose exec app bash
+```
+
+- 全てのコンテナを停止する
+
+```sh
+docker compose down
+```
+
+- 全てのコンテナとイメージとボリュームを削除する
+
+```sh
+docker compose down --rmi all --volumes
+```
