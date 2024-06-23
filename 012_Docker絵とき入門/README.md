@@ -607,3 +607,14 @@ docker compose down
 ```sh
 docker compose down --rmi all --volumes
 ```
+
+## 30章　プロジェクトでDockerを使う
+
+### 30.1 環境変数でcompose.ymlの値をパラメータ化する
+
+書き換えを確認する
+
+
+```sh
+docker compose convert
+```
