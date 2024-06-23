@@ -508,9 +508,8 @@ docker container run \
 --mount type=bind,source="$(pwd)"/src,target=/my-work \
 --publish 8000:8000 \
 work-app:0.1.0 \
-/usr/local/bin/php --server 0.0.0.0:8000 --docroot /my-work /
+/usr/local/bin/php --server 0.0.0.0:8000 --docroot /my-work
 ```
-
 
 - DBコンテナの起動
 
@@ -531,7 +530,6 @@ docker container run \
 mysql:8.2
 ```
 
-
 - Mailコンテナの起動
 
 ```sh
@@ -547,7 +545,6 @@ docker container run \
 axllent/mailpit:v1.10.1
 ```
 
-
 ### 27.2 無座ウザを確認
 
 - エラー
@@ -558,4 +555,16 @@ Warning: Unknown: Failed to open stream: Invalid argument in Unknown on line 0
 
 Fatal error: Failed opening required '/' (include_path='.:/usr/local/lib/php') in Unknown on line 0
 ```
+
+Docker上で実行しても同じ事象
+
+```sh
+root@8f8adf3688b7:/# curl http://localhost:8000
+<br />
+<b>Warning</b>:  Unknown: Failed to open stream: No such file or directory in <b>Unknown</b> on line <b>0</b><br />
+<br />
+<b>Fatal error</b>:  Failed opening required '/' (include_path='.:/usr/local/lib/php') in <b>Unknown</b> on line <b>0</b><br />
+```
+
+→ `docroot` で指定していたパスが誤っていた。　my-workに加えて`/`を追加してしまっていたため
 

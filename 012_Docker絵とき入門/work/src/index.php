@@ -27,7 +27,8 @@ try {
 // ユーザ情報を出力
 
 foreach ($users as $user) {
-  echo $user['id'] . ': ' . $user['name'] . ' (' . $user['age'] . ')<br>';
+  //echo $user['id'] . ': ' . $user['name'] . ' (' . $user['age'] . ')<br>';
+  echo '<p>id  ' . $user['id'] . ', name: ' . $user['name'] . '</p>';
 }
 
 // メールを送信
@@ -36,7 +37,7 @@ $message = 'Docker Hubはこちら　→ https://hub.docker.com/';
 foreach ($users as $user) {
   $success = mb_send_mail($user['email'], $subject, $message);
   if ($success) {
-	echo 'メールを送信しました。' . $user['email'] . '<br>';
+	echo '<p>' . $user['name'] . 'にメールを送信しました。' . $user['email'] . '</p>';
   } else {
 	echo 'メールの送信に失敗しました。' . $user['email'] . '<br>';
   }
