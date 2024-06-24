@@ -614,7 +614,10 @@ docker compose down --rmi all --volumes
 
 書き換えを確認する
 
-
 ```sh
 docker compose convert
 ```
+
+### 30.2 .dockerignoreでビルド時に使用するファイルを除外する
+
+
