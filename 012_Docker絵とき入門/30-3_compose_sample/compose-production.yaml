@@ -1,0 +1,5 @@
+services:
+  sample:
+    image: php:8.3
+    environment:
+      - DEBUG=false

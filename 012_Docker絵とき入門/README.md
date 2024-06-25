@@ -620,4 +620,8 @@ docker compose convert
 
 ### 30.2 .dockerignoreでビルド時に使用するファイルを除外する
 
+### 30.3 複数のDcoekr Composeファイルをマージする
 
+```sh
+docker compose --file compose.yaml --file compose-production.yaml convert
+```
