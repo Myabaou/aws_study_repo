@@ -9,12 +9,38 @@ https://github.com/nektos/act
 mkdir -p .github/workflows
 ```
 
-
 - ymlファイル作成
 
 015_GitHubActions/.github/workflows/sample.yml
 
 ## act 実行
+
+- 確認
+
+```sh
+act -l --container-architecture linux/arm64
+```
+
+- ALL
+
+```sh
+act --container-architecture linux/arm64 -W .github/workflows/sample.yml
+```
+
+
+- Secret
+
+あらかじめ`.secrets`ファイルを作成しておく
+
+```txt
+SLACK_WEBHOOK_URL="https://hooks.slack.com/services/XXXXXXXXXXXXXXXXXXXXXXX"
+```
+
+```sh
+act --container-architecture linux/arm64 -W .github/workflows/sample.yml --secret-file .secrets
+```
+
+- jobのみ
 
 ```sh
 act -j job-matrix --container-architecture linux/arm64 
