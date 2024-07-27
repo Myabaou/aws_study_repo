@@ -1,0 +1,9 @@
+name: Hello                               # ワークフロー名
+on: push                                  # イベんト
+jobs:                                     # ジョブの定義
+  hello:                                  # ジョブ名      
+    runs-on: ubuntu-latest                # ランナー（Ubuntuで実行）
+    steps:                                # ステップの定義
+      - name: Hello                       # ステップ名
+        run: echo "Hello, world!"         # コマンドの実行
+      - uses: actions/checkout@v4         # アクションの呼び出し  
