@@ -27,7 +27,6 @@ act -l --container-architecture linux/arm64
 act --container-architecture linux/arm64 -W .github/workflows/sample.yml
 ```
 
-
 - Secret
 
 あらかじめ`.secrets`ファイルを作成しておく
@@ -93,4 +92,18 @@ echo "aws lambda list-versions-by-function --function-name testlambda --query 'V
 [test-matrix/job-matrix-3] 🏁  Job succeeded
 [test-matrix/job-matrix-2] 🏁  Job succeeded
 [test-matrix/job-matrix-1] 🏁  Job succeeded
+```
+
+---
+
+## Slack通知
+
+### プライベートチャンネル通知単体テスト
+
+```sh
+  curl -X POST -H 'Content-type: application/json' --data '{
+    "username": "'"マイグレくん"'",
+    "icon_url": "'"https://octodex.github.com/images/Robotocat.png"'",
+    "text": ":warning: <!subteam^SXXXXXX>  次の本番デプロイでmigration行われるよ!"
+  }' $SLACK_WEBHOOK_URL
 ```
