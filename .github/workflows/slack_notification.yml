@@ -28,6 +28,6 @@ jobs:
             "icon_url": "'"${{ env.SLACK_ICON }}"'",
             "text": ":warning:  次の本番デプロイでmigration行われるよ! 
             migrateルールは <https://goals-inc.atlassian.net/wiki/spaces/develop/pages/1111032093/migrate|こちら>
-            プルリクエストのリンク: <${PR_URL}>
+            プルリクエストのリンク: ${{ github.event.pull_request.html_url }}
             "
           }' ${{ env.SLACK_WEBHOOK }}
