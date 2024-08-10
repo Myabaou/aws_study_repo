@@ -27,8 +27,7 @@ jobs:
             "username": "'"${{ env.SLACK_USERNAME }}"'",
             "icon_url": "'"${{ env.SLACK_ICON }}"'",
             "text": ":warning:  次の本番デプロイでmigration行われるよ! 
-            migrateルールは <https://goals-inc.atlassian.net/wiki/spaces/develop/pages/1111032093/migrate|こちら>
-            PullTitle: ${{ github.event.pull_request.title }}
-            PullRequestURL: ${{ github.event.pull_request.html_url }}
+            migrateルールは <https://goals-inc.atlassian.net/wiki/spaces/develop/pages/1111032093/migrate|こちら> 
+            PullRequest: <${{ github.event.pull_request.html_url }}|${{ github.event.pull_request.title }}>
             "
           }' ${{ env.SLACK_WEBHOOK }}

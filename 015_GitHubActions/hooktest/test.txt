@@ -3,3 +3,4 @@ PRリンク通知テスト
 ハイパーリンクテスト
 GitHub PR リンクテスト
 GitHub タイトルテスト
+GitHub PullRequestURLTest
