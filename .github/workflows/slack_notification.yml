@@ -1,0 +1,30 @@
+name: "Migration Notification"
+on:
+   pull_request:
+#   push:
+    branches:
+     - main
+
+    types: [closed]
+    paths:
+      - "015_GitHubActions/hooktest/*"
+   workflow_dispatch:
+#-------------------------#
+
+env:
+  SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+  SLACK_USERNAME: "マイグレくん"
+  SLACK_ICON: https://octodex.github.com/images/Robotocat.png
+
+jobs:
+  migration-notification:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
+    steps:
+      - name: Notify migration
+        run: |
+          curl -X POST -H 'Content-type: application/json' --data '{
+            "username": "'"${{ env.SLACK_USERNAME }}"'",
+            "icon_url": "'"${{ env.SLACK_ICON }}"'",
+            "text": ":warning: <!subteam^S02052MQ8KD>  次の本番デプロイでmigration行われるよ! migrateルール: https://goals-inc.atlassian.net/wiki/spaces/develop/pages/1111032093/migrate "
+          }' ${{ env.SLACK_WEBHOOK }}
