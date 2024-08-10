@@ -26,5 +26,6 @@ jobs:
           curl -X POST -H 'Content-type: application/json' --data '{
             "username": "'"${{ env.SLACK_USERNAME }}"'",
             "icon_url": "'"${{ env.SLACK_ICON }}"'",
-            "text": ":warning: <!subteam^S02052MQ8KD>  次の本番デプロイでmigration行われるよ! migrateルール: https://goals-inc.atlassian.net/wiki/spaces/develop/pages/1111032093/migrate "
+            "text": ":warning: <!subteam^S02052MQ8KD>  次の本番デプロイでmigration行われるよ! 
+            migrateルール: https://goals-inc.atlassian.net/wiki/spaces/develop/pages/1111032093/migrate "
           }' ${{ env.SLACK_WEBHOOK }}
