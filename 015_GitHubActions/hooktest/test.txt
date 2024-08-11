@@ -5,3 +5,4 @@ GitHub PR リンクテスト
 GitHub タイトルテスト
 GitHub PullRequestURLTest
 GitHub Slackチャンネル通知分岐実装
+GitHub 分岐処理実装後Slack通知がとばなかったのでDEBUG
