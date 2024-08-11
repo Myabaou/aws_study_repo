@@ -4,6 +4,7 @@ on:
 #   push:
     branches:
      - main
+     - develop
 
     types: [closed]
     paths:
@@ -21,12 +22,34 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.pull_request.merged == true
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # mabashi-pretest-group: S07GEDFS3GS
+      # mabashi-test-group: S07G7Q5PFHU
+      - name: develop or main
+        run: |
+          if [ "${{ github.event.pull_request.base.ref }}" == "main" ]; then
+            echo "main"
+            export MENTION="S07GEDFS3GS"   
+            export CHANNEL_NAME="mabashi-pretest-ch"
+          else
+            
+            echo "develop"
+            export MENTION="S07G7Q5PFHU"   
+            export CHANNEL_NAME="mabashi-test-ch"
+          fi
+
+
       - name: Notify migration
         run: |
           curl -X POST -H 'Content-type: application/json' --data '{
             "username": "'"${{ env.SLACK_USERNAME }}"'",
             "icon_url": "'"${{ env.SLACK_ICON }}"'",
-            "text": ":warning:  次の本番デプロイでmigration行われるよ! 
+            "channel": "'"${CHANNEL_NAME}"'",
+            "text": ":warning:  [本番]migration連絡
+            <!subteam^${MENTION}>
+            次の本番デプロイでmigration行われるよ!
             migrateルールは <https://goals-inc.atlassian.net/wiki/spaces/develop/pages/1111032093/migrate|こちら> 
             PullRequest: <${{ github.event.pull_request.html_url }}|${{ github.event.pull_request.title }}>
             "
