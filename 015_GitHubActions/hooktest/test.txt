@@ -4,3 +4,4 @@ PRリンク通知テスト
 GitHub PR リンクテスト
 GitHub タイトルテスト
 GitHub PullRequestURLTest
+GitHub Slackチャンネル通知分岐実装
