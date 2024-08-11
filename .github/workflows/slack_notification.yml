@@ -31,13 +31,13 @@ jobs:
         run: |
           if [ "${{ github.event.pull_request.base.ref }}" == "main" ]; then
             echo "main"
-            export MENTION="S07GEDFS3GS"   
-            export CHANNEL_NAME="mabashi-pretest-ch"
+            echo "MENTION=S07GEDFS3GS"   >> $GITHUB_ENV
+            echo "CHANNEL_NAME=mabashi-pretest-ch" >> $GITHUB_ENV
           else
             
             echo "develop"
-            export MENTION="S07G7Q5PFHU"   
-            export CHANNEL_NAME="mabashi-test-ch"
+            echo "MENTION=S07G7Q5PFHU"  >> $GITHUB_ENV 
+            echo "CHANNEL_NAME=mabashi-test-ch" >> $GITHUB_ENV
           fi
 
 
