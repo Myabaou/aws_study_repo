@@ -33,11 +33,13 @@ jobs:
             echo "main"
             echo "MENTION=S07GEDFS3GS"   >> $GITHUB_ENV
             echo "CHANNEL_NAME=mabashi-pretest-ch" >> $GITHUB_ENV
+            echo "ENV=本番" >> $GITHUB_ENV
           else
             
             echo "develop"
             echo "MENTION=S07G7Q5PFHU"  >> $GITHUB_ENV 
             echo "CHANNEL_NAME=mabashi-test-ch" >> $GITHUB_ENV
+            echo "ENV=Hotfix" >> $GITHUB_ENV            
           fi
 
 
@@ -50,7 +52,7 @@ jobs:
             "channel": "'"${{ env.CHANNEL_NAME }}"'",
             "text": ":warning:  [本番]migration連絡
             <!subteam^${{ env.MENTION }}>
-            次の本番デプロイでmigration行われるよ!
+            次の${{ env.ENV }}デプロイでmigration行われるよ!
             migrateルールは <https://goals-inc.atlassian.net/wiki/spaces/develop/pages/1111032093/migrate|こちら> 
             PullRequest: <${{ github.event.pull_request.html_url }}|${{ github.event.pull_request.title }}>
             "
