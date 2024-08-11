@@ -47,9 +47,9 @@ jobs:
           curl -X POST -H 'Content-type: application/json' --data '{
             "username": "'"${{ env.SLACK_USERNAME }}"'",
             "icon_url": "'"${{ env.SLACK_ICON }}"'",
-            "channel": "'"${CHANNEL_NAME}"'",
+            "channel": "'"${{ env.CHANNEL_NAME }}"'",
             "text": ":warning:  [本番]migration連絡
-            <!subteam^S07GEDFS3GS>
+            <!subteam^${{ env.MENTION }}>
             次の本番デプロイでmigration行われるよ!
             migrateルールは <https://goals-inc.atlassian.net/wiki/spaces/develop/pages/1111032093/migrate|こちら> 
             PullRequest: <${{ github.event.pull_request.html_url }}|${{ github.event.pull_request.title }}>
