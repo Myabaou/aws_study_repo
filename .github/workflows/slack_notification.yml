@@ -43,6 +43,7 @@ jobs:
 
       - name: Notify migration
         run: |
+          echo "メンション: ${MENTION} チャンネル: ${CHANNEL_NAME}"
           curl -X POST -H 'Content-type: application/json' --data '{
             "username": "'"${{ env.SLACK_USERNAME }}"'",
             "icon_url": "'"${{ env.SLACK_ICON }}"'",
