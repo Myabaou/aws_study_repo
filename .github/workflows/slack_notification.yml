@@ -49,7 +49,7 @@ jobs:
             "icon_url": "'"${{ env.SLACK_ICON }}"'",
             "channel": "'"${CHANNEL_NAME}"'",
             "text": ":warning:  [本番]migration連絡
-            <!subteam^${MENTION}>
+            <!subteam^S07GEDFS3GS>
             次の本番デプロイでmigration行われるよ!
             migrateルールは <https://goals-inc.atlassian.net/wiki/spaces/develop/pages/1111032093/migrate|こちら> 
             PullRequest: <${{ github.event.pull_request.html_url }}|${{ github.event.pull_request.title }}>
