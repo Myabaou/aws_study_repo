@@ -50,7 +50,7 @@ jobs:
             "username": "'"${{ env.SLACK_USERNAME }}"'",
             "icon_url": "'"${{ env.SLACK_ICON }}"'",
             "channel": "'"${{ env.CHANNEL_NAME }}"'",
-            "text": ":warning:  [本番]migration連絡
+            "text": ":warning:  [${{ env.ENV }}]migration連絡 :warning:
             <!subteam^${{ env.MENTION }}>
             次の${{ env.ENV }}デプロイでmigration行われるよ!
             migrateルールは <https://goals-inc.atlassian.net/wiki/spaces/develop/pages/1111032093/migrate|こちら> 
