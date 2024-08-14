@@ -16,6 +16,8 @@ env:
   SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
   SLACK_USERNAME: "マイグレくん"
   SLACK_ICON: https://octodex.github.com/images/Robotocat.png
+  MAIN_BRANCH: main
+  TEST_BRANCH: develop
 
 jobs:
   migration-notification:
@@ -29,14 +31,14 @@ jobs:
       # mabashi-test-group: S07G7Q5PFHU
       - name: develop or main
         run: |
-          if [ "${{ github.event.pull_request.base.ref }}" == "main" ]; then
-            echo "main"
+          if [ "${{ github.event.pull_request.base.ref }}" == "${{ env.MAIN_BRANCH}}" ]; then
+            echo "${{ env.MAIN_BRANCH}}"
             echo "MENTION=S07GEDFS3GS"   >> $GITHUB_ENV
             echo "CHANNEL_NAME=mabashi-pretest-ch" >> $GITHUB_ENV
             echo "ENV=本番" >> $GITHUB_ENV
           else
             
-            echo "develop"
+            echo "${{ env.TEST_BRANCH}}"
             echo "MENTION=S07G7Q5PFHU"  >> $GITHUB_ENV 
             echo "CHANNEL_NAME=mabashi-test-ch" >> $GITHUB_ENV
             echo "ENV=Hotfix" >> $GITHUB_ENV            
