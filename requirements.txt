@@ -1,2 +1,2 @@
 boto3
-moto
+moto[lambda]==2.2.17
