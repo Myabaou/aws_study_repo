@@ -37,3 +37,11 @@ jobs:
 
       - name: List S3 buckets
         run: aws s3 ls
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run Lambda tests
+        run: |
+          python -m unittest discover -s tests
