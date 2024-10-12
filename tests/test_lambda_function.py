@@ -1,5 +1,6 @@
 import unittest
 import boto3
+import json
 from moto import mock_lambda, mock_iam
 
 class TestLambdaFunction(unittest.TestCase):
