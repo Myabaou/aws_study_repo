@@ -13,9 +13,9 @@ class TestLambdaFunction(unittest.TestCase):
         client.create_function(
             FunctionName='test_lambda',
             Runtime='python3.8',
-            Role='arn:aws:iam::123456789012:role/service-role/test-role',
+            Role='arn:aws:iam::931240111674:role/mbs-test-lambda-role',
             Handler='lambda_function.lambda_handler',
-            Code={'ZipFile': b'fileb://path_to_your_lambda_function.zip'},
+            Code={'ZipFile': b'fileb://lambda_function.zip'},
         )
 
         # Lambda関数を呼び出し
