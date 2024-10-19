@@ -38,6 +38,11 @@ jobs:
       - name: List S3 buckets
         run: aws s3 ls
 
+      # LambdaのZipファイルを作成
+      - name: Zip Lambda function
+        run: |
+          zip lambda_function.zip lambda_function.py
+
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
