@@ -36,7 +36,7 @@ class TestLambdaFunction(unittest.TestCase):
         # テスト用のLambda関数を作成
         lambda_client.create_function(
             FunctionName="test_lambda",
-            Runtime="python3.11",
+            Runtime="python3.8",
             Role=role_arn,  # モックのロールを使用
             Handler="lambda_function.lambda_handler",
             Code={"ZipFile": b"fileb://lambda_function.zip"},
